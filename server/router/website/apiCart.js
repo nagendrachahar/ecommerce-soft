@@ -91,25 +91,13 @@ router.post('/api/web/apiCart/fillToCart', verifyToken("none"), async (req,res, 
   //console.log(req.query.pid);
   if(userType === "Customer"){
     console.log(req.body);
-
-    // let cart = await Cart.findOne({productId: req.query.pid, customerId: id});
-    // const data = {};
-    // console.log(cart)
-    // if(cart == null){
-
-    //   const product = await Product.findOne({_id: req.query.pid});
-    //   data.customerId = id;
-    //   data.productId = product._id
-    //   data.quantity = 1;
-
-    //   cart = new Cart(data);
-
-    // }
-    // else{
-    //   cart.quantity = cart.quantity + 1;
-    // }
-
-    // await cart.save();
+    const cartData = req.body;
+    let cart = "";
+    for(let i = 0; i < cartData.length; i++){
+      cartData.customerId = id;
+      cart = new Cart(cartData);
+      await cart.save();
+    }
 
     res.status(200).json({
       resType: 'success',

@@ -54,7 +54,7 @@ router.post('/api/checkLogin', async (req,res, next) => {
 });
 
  
-router.get('/api/checkSession', verifyToken("none"), function(req,res){
+router.get('/api/checkSession', verifyToken("none"), function(req,res,next){
   if(isAdmin(res)){
     res.status(200).json({
       resType: 'success',
@@ -70,7 +70,7 @@ router.get('/api/checkSession', verifyToken("none"), function(req,res){
 });
 
 
-router.get('/api/checkSellerSession', verifyToken("none"), function(req,res){
+router.get('/api/checkSellerSession', verifyToken("none"), function(req,res, next){
   if(res.locals.decoded.userType === 'Seller'){
     res.status(200).json({
       resType: 'success',

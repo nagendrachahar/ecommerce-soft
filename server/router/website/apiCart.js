@@ -94,8 +94,8 @@ router.post('/api/web/apiCart/fillToCart', verifyToken("none"), async (req,res, 
     const cartData = req.body;
     let cart = "";
     for(let i = 0; i < cartData.length; i++){
-      cartData.customerId = id;
-      cart = new Cart(cartData);
+      cartData[i].customerId = id;
+      cart = new Cart(cartData[i]);
       await cart.save();
     }
 
